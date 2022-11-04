@@ -5,10 +5,7 @@ import in.synechron.johndeere.spim.app.ws.io.entity.UserEntity;
 import in.synechron.johndeere.spim.app.ws.service.userService;
 import in.synechron.johndeere.spim.app.ws.shared.dto.UserDto;
 import in.synechron.johndeere.spim.app.ws.shared.dto.Utils;
-
-
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,14 +17,21 @@ import java.util.ArrayList;
 @Service
 public class UserServiceImpl implements userService {
 
-    @Autowired
+    final
     UserRepository userRepository;
 
-    @Autowired
+    final
     Utils utils;
 
-    @Autowired
+    final
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public UserServiceImpl(UserRepository userRepository, Utils utils, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.utils = utils;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
     @Override
     public UserDto createUser(UserDto user) {
 
